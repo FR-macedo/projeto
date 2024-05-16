@@ -5,7 +5,7 @@ const printError = (error: any) => { console.log(error.sqlMessage || error.messa
 const createTables = () => connection
    .raw(`
 
-    CREATE TABLE IF NOT EXISTS aula49_users (
+    CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
         name VARCHAR(255) UNIQUE NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
@@ -15,3 +15,8 @@ const createTables = () => connection
 `)
    .then(() => { console.log("Tabelas criadas") })
    .catch(printError)
+
+   const closeConnection = () => { connection.destroy() }
+
+   createTables()
+   .finally(closeConnection)

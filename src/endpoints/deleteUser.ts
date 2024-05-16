@@ -7,7 +7,7 @@ export async function deleteUser(req: Request, res: Response) {
         const { id } = req.params;
         await connection('users').where({ id }).del();
         res.status(200).send({ message: 'User deleted successfully' });
-    } catch (error) {
+    } catch (error: any) {
         res.status(500).send({ message: error.message });
     }
 }
